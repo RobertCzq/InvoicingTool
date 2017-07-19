@@ -1,0 +1,84 @@
+﻿@model IEnumerable<InvoicingTool.Models.Invoice>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Invoices Overview</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find : @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Invoice Title", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceDescription)
+        </th>
+        <th>
+            @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.ProjectSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Customer Name", "Index", new { sortOrder = ViewBag.CustomerSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.ActionLink("Invoice Date", "Index", new { sortOrder = ViewBag.InvoiceDateSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Due Date", "Index", new { sortOrder = ViewBag.DueDateSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.ProjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
